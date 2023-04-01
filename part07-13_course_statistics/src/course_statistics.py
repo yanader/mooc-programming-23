@@ -22,6 +22,24 @@ def retrieve_course(course_name:str):
     request = urllib.request.urlopen(address, cafile=certifi.where())
     data = request.read()
     course_list = json.loads(data)
+    
+    students_count = 0
+    hours_count = 0
+    exercise_count = 0
+    course_dict = {}
+    course_dict['weeks'] = len(course_list)
+    for week in course_list:
+        if course_list.get(week).get('students') > students_count:
+            students_count = course_list.get(week).get('students')
+        hours_count += course_list.get(week).get('hour_total')
+        exercise_count += course_list.get(week).get('exercise_total')
+    course_dict['students'] = students_count
+    course_dict['hours'] = hours_count
+    course_dict['hours_average'] = hours_count // students_count
+    course_dict['exercises'] = exercise_count
+    course_dict['exercises_average'] = exercise_count // students_count
+
+    return course_dict
 
 if __name__ == "__main__":
-    retrieve_course('docker2019')
+    print(retrieve_course('docker2019'))
