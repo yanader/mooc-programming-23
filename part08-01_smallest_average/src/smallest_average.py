@@ -12,4 +12,6 @@ def smallest_average(person1:dict, person2:dict, person3:dict):
             return_person = person
             
     return return_person
-        
+
+
+
