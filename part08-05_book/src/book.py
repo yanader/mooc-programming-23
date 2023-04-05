@@ -6,3 +6,5 @@ class Book:
         self.author = author
         self.genre = genre
         self.year = year
+
+print(4)
