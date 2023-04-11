@@ -8,3 +8,13 @@ class CourseAttempt:
         return f"{self.student_name}, grade for the course {self.course_name} {self.grade}"
 
 
+def accepted(attempts:list):
+    return list(filter(lambda CourseAttempt:CourseAttempt.grade > 0, attempts))
+
+def attempts_with_grade(attempts:list, grade:int):
+    return filter(lambda CourseAttempt:CourseAttempt.grade==grade, attempts)
+
+def passed_students(attempts:list, course:str):
+
+    return sorted(list(map(lambda CourseAttempt:CourseAttempt.student_name, 
+                           filter(lambda CourseAttempt: CourseAttempt.grade > 0 and CourseAttempt.course_name == course, attempts))))
